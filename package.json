@@ -17,6 +17,7 @@
     "gulp-responsive-images": "0.0.3",
     "gulp-uglify": "^3.0.1",
     "gulp-util": "^3.0.8",
+    "hoek": "^5.0.3",
     "jasmine": "^3.1.0",
     "now": "^11.3.5"
   },
