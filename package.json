@@ -1,6 +1,5 @@
 {
-  "name": "",
-  "version": "",
+  "name": "mws-restaurant-stage-1",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
@@ -33,5 +32,26 @@
     "imagemin-pngquant": "^5.0.1",
     "phantomjs": "^2.1.7",
     "pngquant-bin": "^3.1.1"
-  }
+  },
+  "description": "---\r #### _Three Stage Course Material Project - Restaurant Reviews_",
+  "version": "1.0.0",
+  "main": "gulpfile.babel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Userrick/mws-restaurant-stage-1.git"
+  },
+  "keywords": [
+    "responsive",
+    "accesibility",
+    "serviceWorker"
+  ],
+  "author": "Rick Warling",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Userrick/mws-restaurant-stage-1/issues"
+  },
+  "homepage": "https://github.com/Userrick/mws-restaurant-stage-1#readme"
 }

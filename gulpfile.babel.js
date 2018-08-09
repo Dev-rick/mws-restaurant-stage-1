@@ -32,8 +32,12 @@ const paths = {
     dest: 'dist/min_css/'
   },
   images: {
-    src: 'src/imgs/*',
-    dest: 'dist/imgs/'
+    src: 'src/img/*',
+    dest: 'dist/img/'
+  },
+  data: {
+    src: 'src/data/*',
+    dest: 'dist/data/'
   }
 };
 
@@ -43,13 +47,18 @@ function scripts() {
   return src(paths.scripts.src, { sourcemaps: true })
     .pipe(babel()) // makes it old JS code
     .pipe(uglify()) //minifies js
-    .pipe(concat('index.min.js')) //joins files together
+    // .pipe(concat('index.min.js')) //joins files together
     .pipe(dest(paths.scripts.dest));
 }
 
 function copyIndexHTMLToDist() {
   return src(paths.templates.src, {sourcemaps: true})
   .pipe(dest(paths.templates.dest));
+}
+
+function copyDataDirToDist() {
+  return src(paths.data.src, {sourcemaps: true})
+  .pipe(dest(paths.data.dest));
 }
 
 //can add here like scripts a clean css to minify it and a concat
@@ -67,6 +76,7 @@ function sassToCSS() {
     .pipe(sass().on('error', sass.logError))
     .pipe(dest(paths.sass.dest));
 }
+
 
 
 
@@ -89,106 +99,106 @@ function serve(done) {
 
 function resizeImages() {
   return src(paths.images.src, { sourcemaps: true })
-  .pipe(responsive({
-        '*.*': [{
-          // image-small.jpg is 500 pixels wide
-          width: 500,
-          rename: {
-            suffix: '-small_1x',
-            extname: '.jpg',
-          },
-        }, {
-          // image-small@2x.jpg is 1000 pixels wide
-          width: 500 * 2,
-          rename: {
-            suffix: '-small_2x',
-            extname: '.jpg',
-          },
-        }, {
-          // image-medium.jpg is 480 pixels wide
-          width: 1000,
-          rename: {
-            suffix: '-medium_1x',
-            extname: '.jpg',
-          },
-        }, {
-          // image-large@2x.jpg is 960 pixels wide
-          width: 1000 * 2,
-          rename: {
-            suffix: '-medium_2x',
-            extname: '.jpg',
-          },
-        }, {
-          // image-extralarge.jpg is 1280 pixels wide
-          width: 800,
-          rename: {
-            suffix: '-large_1x',
-            extname: '.jpg',
-          },
-        }, {
-          // image-extralarge@2x.jpg is 2560 pixels wide
-          width: 800 * 2,
-          rename: {
-            suffix: '-large_2x',
-            extname: '.jpg',
-          },
-        }, {
-          // image-small.webp is 200 pixels wide
-          width: 500,
-          rename: {
-            suffix: '-small_1x',
-            extname: '.webp',
-          },
-        }, {
-          // image-small@2x.webp is 400 pixels wide
-          width: 500 * 2,
-          rename: {
-            suffix: '-small_2x',
-            extname: '.webp',
-          },
-        }, {
-          // image-large.webp is 480 pixels wide
-          width: 1000,
-          rename: {
-            suffix: '-medium_1x',
-            extname: '.webp',
-          },
-        }, {
-          // image-large@2x.webp is 960 pixels wide
-          width: 1000 * 2,
-          rename: {
-            suffix: '-medium_2x',
-            extname: '.webp',
-          },
-        }, {
-          // image-extralarge.webp is 1280 pixels wide
-          width: 800,
-          rename: {
-            suffix: '-large_1x',
-            extname: '.webp',
-          },
-        }, {
-          // image-extralarge@2x.webp is 2560 pixels wide
-          width: 800 * 2,
-          rename: {
-            suffix: '-large_2x',
-            extname: '.webp',
-          },
-        }],
-  }, {
-  // Global configuration for all images
-
-  withoutEnlargement: true,
-  // The output quality for JPEG, WebP and TIFF output formats
-  quality: 100,
-  // Use progressive (interlace) scan for JPEG and PNG output
-  progressive: true,
-  // Strip all metadata
-  withMetadata: false,
-  // Do not emit the error when image is enlarged.
-  skipOnEnlargement: false,
-  errorOnEnlargement: false,
-}))
+//   .pipe(responsive({
+//         '*.*': [{
+//           // image-small.jpg is 500 pixels wide
+//           width: 500,
+//           rename: {
+//             suffix: '-small_1x',
+//             extname: '.jpg',
+//           },
+//         }, {
+//           // image-small@2x.jpg is 1000 pixels wide
+//           width: 500 * 2,
+//           rename: {
+//             suffix: '-small_2x',
+//             extname: '.jpg',
+//           },
+//         }, {
+//           // image-medium.jpg is 480 pixels wide
+//           width: 1000,
+//           rename: {
+//             suffix: '-medium_1x',
+//             extname: '.jpg',
+//           },
+//         }, {
+//           // image-large@2x.jpg is 960 pixels wide
+//           width: 1000 * 2,
+//           rename: {
+//             suffix: '-medium_2x',
+//             extname: '.jpg',
+//           },
+//         }, {
+//           // image-extralarge.jpg is 1280 pixels wide
+//           width: 800,
+//           rename: {
+//             suffix: '-large_1x',
+//             extname: '.jpg',
+//           },
+//         }, {
+//           // image-extralarge@2x.jpg is 2560 pixels wide
+//           width: 800 * 2,
+//           rename: {
+//             suffix: '-large_2x',
+//             extname: '.jpg',
+//           },
+//         }, {
+//           // image-small.webp is 200 pixels wide
+//           width: 500,
+//           rename: {
+//             suffix: '-small_1x',
+//             extname: '.webp',
+//           },
+//         }, {
+//           // image-small@2x.webp is 400 pixels wide
+//           width: 500 * 2,
+//           rename: {
+//             suffix: '-small_2x',
+//             extname: '.webp',
+//           },
+//         }, {
+//           // image-large.webp is 480 pixels wide
+//           width: 1000,
+//           rename: {
+//             suffix: '-medium_1x',
+//             extname: '.webp',
+//           },
+//         }, {
+//           // image-large@2x.webp is 960 pixels wide
+//           width: 1000 * 2,
+//           rename: {
+//             suffix: '-medium_2x',
+//             extname: '.webp',
+//           },
+//         }, {
+//           // image-extralarge.webp is 1280 pixels wide
+//           width: 800,
+//           rename: {
+//             suffix: '-large_1x',
+//             extname: '.webp',
+//           },
+//         }, {
+//           // image-extralarge@2x.webp is 2560 pixels wide
+//           width: 800 * 2,
+//           rename: {
+//             suffix: '-large_2x',
+//             extname: '.webp',
+//           },
+//         }],
+//   }, {
+//   // Global configuration for all images
+//
+//   withoutEnlargement: true,
+//   // The output quality for JPEG, WebP and TIFF output formats
+//   quality: 100,
+//   // Use progressive (interlace) scan for JPEG and PNG output
+//   progressive: true,
+//   // Strip all metadata
+//   withMetadata: false,
+//   // Do not emit the error when image is enlarged.
+//   skipOnEnlargement: false,
+//   errorOnEnlargement: false,
+// }))
 .pipe(imagemin({
      progressive: true,
      use: [pngquant()]
@@ -210,7 +220,7 @@ const watchScripts = () => watch(paths.scripts.src, gulp.series(scripts, reload)
 const watchHTML = () => watch(paths.templates.src, gulp.series(copyIndexHTMLToDist, reload));
 const watchStyles = () => watch(paths.sass.src, gulp.series(sassToCSS, styles, reload));
 
-const dev = series(clean, copyIndexHTMLToDist, scripts, sassToCSS, styles, resizeImages, serve);
+const dev = series(clean, copyIndexHTMLToDist, copyDataDirToDist, scripts, sassToCSS, styles, resizeImages, serve);
 const dev1 = parallel(watchScripts, watchStyles, watchHTML);
 
 const dev2 = series(dev, dev1);
