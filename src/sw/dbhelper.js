@@ -8,9 +8,8 @@ class DBHelper {
    * Change this to restaurants.json file location on your server.
    */
   static get DATABASE_URL() {
-    return 'https://project-restaurant-reviews.appspot.com/data/restaurants.json';
-    // const port = 3000; // Change this to your server port
-    // return `http://localhost:${port}/data/restaurants.json`;
+    const port = 3000; // Change this to your server port
+    return `http://localhost:${port}/data/restaurants.json`;
   }
 
   /**

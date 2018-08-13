@@ -38,6 +38,10 @@ const paths = {
   data: {
     src: 'src/data/*',
     dest: 'dist/data/'
+  },
+  sw: {
+    src: 'src/sw/*.js',
+    dest: 'dist/'
   }
 };
 
@@ -59,6 +63,13 @@ function copyIndexHTMLToDist() {
 function copyDataDirToDist() {
   return src(paths.data.src, {sourcemaps: true})
   .pipe(dest(paths.data.dest));
+}
+
+function sW() {
+  return src(paths.sw.src, {sourcemaps: true})
+  .pipe(babel()) // makes it old JS code
+  .pipe(uglify()) //minifies js
+  .pipe(dest(paths.sw.dest));
 }
 
 //can add here like scripts a clean css to minify it and a concat
@@ -217,11 +228,12 @@ function resizeImages() {
 
 
 const watchScripts = () => watch(paths.scripts.src, gulp.series(scripts, reload));
+const watchSW = () => watch(paths.sw.src, gulp.series(sW, reload));
 const watchHTML = () => watch(paths.templates.src, gulp.series(copyIndexHTMLToDist, reload));
 const watchStyles = () => watch(paths.sass.src, gulp.series(sassToCSS, styles, reload));
 
-const dev = series(clean, copyIndexHTMLToDist, copyDataDirToDist, scripts, sassToCSS, styles, resizeImages, serve);
-const dev1 = parallel(watchScripts, watchStyles, watchHTML);
+const dev = series(clean, copyIndexHTMLToDist, copyDataDirToDist, sW, scripts, sassToCSS, styles, resizeImages, serve);
+const dev1 = parallel(watchScripts, watchStyles, watchHTML, watchSW);
 
 const dev2 = series(dev, dev1);
 export default dev2;
