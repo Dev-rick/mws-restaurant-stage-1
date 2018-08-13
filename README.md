@@ -15,4 +15,4 @@ Visit here: [Restaurant Reviews](https://project-restaurant-reviews.appspot.com/
 
 ## Other information
 
-**Used a modified version of the combobox example from the course 'Accessibility' on Udacity**
+**Used a modified version of the combobox example from the course 'Accessibility' on Udacity (https://github.com/udacity/ud891) **
